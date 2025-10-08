@@ -233,7 +233,7 @@ export function ShoppingCartContent() {
           <h2 className="text-2xl font-semibold">Produkty w koszyku ({cartItems.length})</h2>
           <Button variant="outline" onClick={clearCart} className="gap-2 bg-transparent">
             <Trash2 className="h-4 w-4" />
-            Wyczyść koszyk
+            <span className="hidden sm:inline">Wyczyść koszyk</span>
           </Button>
         </div>
 
@@ -268,12 +268,12 @@ export function ShoppingCartContent() {
                     <p className="text-sm text-red-800">{stockWarnings[itemKey]}</p>
                   </div>
                 )}
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                     <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">{item.name}</h3>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-base sm:text-lg mb-1 truncate">{item.name}</h3>
                     <p className="text-sm text-gray-600 mb-2">Kolor: {item.color}</p>
                     <div className="flex flex-wrap gap-1 mb-2">
                       {formattedSizes.map((size, idx) => (
@@ -282,8 +282,10 @@ export function ShoppingCartContent() {
                         </Badge>
                       ))}
                     </div>
-                    <p className="text-sm text-gray-500">Asortyment: {piecesPerPackage} szt. (wszystkie rozmiary)</p>
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="text-xs sm:text-sm text-gray-500">
+                      Asortyment: {piecesPerPackage} szt. (wszystkie rozmiary)
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">
                       Dostępny stan: <span className="font-semibold">{item.stockQuantity} szt.</span>
                     </p>
 
@@ -311,16 +313,24 @@ export function ShoppingCartContent() {
                           <Plus className="h-4 w-4" />
                         </Button>
                       </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeItem(index)}
+                        className="text-red-600 hover:text-red-700 sm:hidden ml-auto"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end justify-between">
-                    <div className="text-right">
+                  <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-between border-t sm:border-t-0 pt-3 sm:pt-0 mt-3 sm:mt-0">
+                    <div className="text-left sm:text-right">
                       <p className="text-xs text-gray-500 mb-1">
-                        Cena netto: {item.price.toFixed(2)} PLN × {piecesPerPackage} szt. × {item.quantity || 1}
+                        {item.price.toFixed(2)} PLN × {piecesPerPackage} × {item.quantity || 1}
                       </p>
                       <p className="text-sm text-gray-600 mb-1">Netto: {itemNetPrice.toFixed(2)} PLN</p>
-                      <p className="text-xs text-gray-500 mb-1">VAT (23%): {itemVAT.toFixed(2)} PLN</p>
-                      <p className="text-2xl font-bold text-[#8B1538]">
+                      <p className="text-xs text-gray-500 mb-1">VAT: {itemVAT.toFixed(2)} PLN</p>
+                      <p className="text-xl sm:text-2xl font-bold text-[#8B1538]">
                         {itemGrossPrice.toFixed(2)} PLN
                         <span className="text-xs font-normal text-gray-500 ml-1">brutto</span>
                       </p>
@@ -329,7 +339,7 @@ export function ShoppingCartContent() {
                       variant="ghost"
                       size="sm"
                       onClick={() => removeItem(index)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-red-600 hover:text-red-700 hidden sm:flex"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
