@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ["/admin/", "/api/", "/koszyk", "/zamowienie/"],
       },
     ],
-    sitemap: "https://direnber.eu/sitemap.xml",
+    sitemap: "https://www.direnber.eu/sitemap.xml", // Updated to use www subdomain
   }
 }

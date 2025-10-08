@@ -1,15 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 
 export default async function sitemap() {
-  const supabase = await createClient()
-
-  // Get all active products
-  const { data: products } = await supabase.from("products").select("slug, updated_at").eq("is_active", true)
-
-  // Get all categories
-  const { data: categories } = await supabase.from("categories").select("slug, created_at")
-
-  const baseUrl = "https://direnber.eu"
+  const baseUrl = "https://www.direnber.eu"
 
   // Static pages
   const staticPages = [
@@ -63,23 +55,37 @@ export default async function sitemap() {
     },
   ]
 
-  // Product pages
-  const productPages =
-    products?.map((product) => ({
-      url: `${baseUrl}/produkt/${product.slug}`,
-      lastModified: new Date(product.updated_at),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })) || []
+  try {
+    const supabase = await createClient()
 
-  // Category pages
-  const categoryPages =
-    categories?.map((category) => ({
-      url: `${baseUrl}/kategoria/${category.slug}`,
-      lastModified: new Date(category.created_at),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })) || []
+    // Get all active products
+    const { data: products } = await supabase.from("products").select("slug, updated_at").eq("is_active", true)
 
-  return [...staticPages, ...productPages, ...categoryPages]
+    // Get all categories
+    const { data: categories } = await supabase.from("categories").select("slug, created_at")
+
+    // Product pages
+    const productPages =
+      products?.map((product) => ({
+        url: `${baseUrl}/produkt/${product.slug}`,
+        lastModified: new Date(product.updated_at),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })) || []
+
+    // Category pages
+    const categoryPages =
+      categories?.map((category) => ({
+        url: `${baseUrl}/kategoria/${category.slug}`,
+        lastModified: new Date(category.created_at),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })) || []
+
+    return [...staticPages, ...productPages, ...categoryPages]
+  } catch (error) {
+    console.error("[v0] Sitemap generation error:", error)
+    // Return static pages if database connection fails
+    return staticPages
+  }
 }
