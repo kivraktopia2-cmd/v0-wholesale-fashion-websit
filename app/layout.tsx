@@ -11,8 +11,58 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "DiRENBER - Hurtownia Odzieży Damskiej",
-  description: "Passion & Fashion - Wysokiej jakości odzież damska w asortymentach hurtowych",
+  metadataBase: new URL("https://direnber.eu"),
+  title: {
+    default: "DiRENBER - Hurtownia Odzieży Damskiej | Sprzedaż Hurtowa",
+    template: "%s | DiRENBER",
+  },
+  description:
+    "DiRENBER - profesjonalna hurtownia odzieży damskiej. Wysokiej jakości sukienki, bluzki, spodnie w asortymentach hurtowych. Minimum zamówienie 300 PLN. Dostawa 2-3 dni robocze.",
+  keywords: [
+    "hurtownia odzieży damskiej",
+    "odzież damska hurt",
+    "sukienki hurt",
+    "bluzki hurt",
+    "spodnie hurt",
+    "sprzedaż hurtowa odzieży",
+    "DiRENBER",
+    "hurtownia Polska",
+  ],
+  authors: [{ name: "DiRENBER" }],
+  creator: "DiRENBER",
+  publisher: "DIRENBER Sp. z o.o.",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    url: "https://direnber.eu",
+    siteName: "DiRENBER",
+    title: "DiRENBER - Hurtownia Odzieży Damskiej",
+    description: "Wysokiej jakości odzież damska w asortymentach hurtowych. Minimum zamówienie 300 PLN.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DiRENBER - Hurtownia Odzieży Damskiej",
+    description: "Wysokiej jakości odzież damska w asortymentach hurtowych",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code-here",
+  },
   generator: "v0.app",
 }
 
