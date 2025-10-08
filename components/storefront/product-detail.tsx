@@ -3,7 +3,18 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ShoppingCart, Check, AlertCircle, ChevronLeft, ChevronRight, CreditCard, Shield, Truck } from "lucide-react"
+import {
+  ShoppingCart,
+  Check,
+  AlertCircle,
+  ChevronLeft,
+  ChevronRight,
+  CreditCard,
+  Shield,
+  Truck,
+  Plus,
+  Minus,
+} from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface Product {
@@ -41,6 +52,7 @@ const VAT_RATE = 0.23
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedColor, setSelectedColor] = useState<string | null>(product.product_colors?.[0]?.id || null)
+  const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
   const [colorError, setColorError] = useState(false)
   const [stockError, setStockError] = useState<string | null>(null)
@@ -53,6 +65,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
   useEffect(() => {
     setSelectedImage(0)
+    setQuantity(1) // Reset quantity when color changes
   }, [selectedColor])
 
   const formatSizeDisplay = (sizes: string[] | Array<{ size: string; quantity: number }> | string) => {
@@ -108,7 +121,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     const existingItem = cart.find((item: any) => item.productId === product.id && item.colorId === selectedColor)
     const currentQuantityInCart = existingItem ? existingItem.quantity || 1 : 0
 
-    if (currentQuantityInCart >= selectedColorData.stock_quantity) {
+    if (currentQuantityInCart + quantity > selectedColorData.stock_quantity) {
       setStockError(
         `Nie można dodać więcej. Dostępny stan: ${selectedColorData.stock_quantity} szt. (${currentQuantityInCart} już w koszyku)`,
       )
@@ -121,7 +134,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     const colorImage = sortedImages[0]?.image_url || allImages[0]?.image_url
 
     if (existingItem) {
-      existingItem.quantity = (existingItem.quantity || 1) + 1
+      existingItem.quantity = (existingItem.quantity || 1) + quantity
     } else {
       cart.push({
         productId: product.id,
@@ -131,7 +144,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
         image: colorImage,
         color: selectedColorData.color_name_pl,
         sizes: product.sizes_included,
-        quantity: 1,
+        quantity: quantity,
         stockQuantity: selectedColorData.stock_quantity,
         piecesPerPackage: totalPiecesInPackage,
       })
@@ -149,6 +162,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     setSelectedColor(colorId)
     setColorError(false)
     setStockError(null)
+    setQuantity(1) // Reset quantity when color changes
   }
 
   const handlePrevImage = () => {
@@ -193,14 +207,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
                   <>
                     <button
                       onClick={handlePrevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 md:p-2 rounded-full shadow-lg md:opacity-0 md:group-hover:opacity-100 transition-opacity z-10"
                       aria-label="Poprzednie zdjęcie"
                     >
                       <ChevronLeft className="h-6 w-6 text-gray-800" />
                     </button>
                     <button
                       onClick={handleNextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 md:p-2 rounded-full shadow-lg md:opacity-0 md:group-hover:opacity-100 transition-opacity z-10"
                       aria-label="Następne zdjęcie"
                     >
                       <ChevronRight className="h-6 w-6 text-gray-800" />
@@ -214,6 +228,29 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </div>
             )}
           </div>
+
+          {sortedImages.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {sortedImages.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`relative flex-shrink-0 w-20 h-24 rounded-lg overflow-hidden border-2 transition-all ${
+                    selectedImage === index
+                      ? "border-gray-900 ring-2 ring-gray-900 ring-offset-2"
+                      : "border-gray-200 hover:border-gray-400"
+                  }`}
+                >
+                  <Image
+                    src={image.image_url || "/placeholder.svg"}
+                    alt={`${product.name_pl} - zdjęcie ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">
@@ -298,6 +335,36 @@ export function ProductDetail({ product }: ProductDetailProps) {
               )}
             </div>
           )}
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">ILOŚĆ</h3>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center border-2 border-gray-300 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setQuantity((prev) => prev - 1)}
+                  disabled={quantity <= 1}
+                  className="p-3 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Zmniejsz ilość"
+                >
+                  <Minus className="h-5 w-5 text-gray-700" />
+                </button>
+                <div className="px-6 py-3 min-w-[80px] text-center">
+                  <span className="text-lg font-semibold text-gray-900">{quantity}</span>
+                </div>
+                <button
+                  onClick={() => setQuantity((prev) => prev + 1)}
+                  disabled={!selectedColorData || quantity >= selectedColorData.stock_quantity}
+                  className="p-3 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Zwiększ ilość"
+                >
+                  <Plus className="h-5 w-5 text-gray-700" />
+                </button>
+              </div>
+              <span className="text-sm text-gray-600">
+                {quantity > 1 && `${quantity * totalPiecesInPackage} sztuk łącznie`}
+              </span>
+            </div>
+          </div>
 
           {stockError && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
