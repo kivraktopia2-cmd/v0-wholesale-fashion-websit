@@ -2,6 +2,17 @@ import { StorefrontHeader } from "@/components/storefront/storefront-header"
 import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import { createClient } from "@/lib/supabase/server"
 import { Cookie } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Polityka Cookies - DiRENBER | Informacje o Plikach Cookies",
+  description:
+    "Polityka cookies DiRENBER - informacje o wykorzystaniu plików cookies w sklepie internetowym. Zarządzanie cookies, rodzaje plików cookies. DIRENBER Sp. z o.o.",
+  keywords: ["polityka cookies", "pliki cookies", "ciasteczka", "DiRENBER", "cookies sklep internetowy"],
+  alternates: {
+    canonical: "https://direnber.eu/polityka-cookies",
+  },
+}
 
 export default async function CookiePolicyPage() {
   const supabase = await createClient()

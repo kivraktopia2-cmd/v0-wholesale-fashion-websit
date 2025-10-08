@@ -2,6 +2,23 @@ import { StorefrontHeader } from "@/components/storefront/storefront-header"
 import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import { createClient } from "@/lib/supabase/server"
 import { FileText } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Regulamin Sklepu - DiRENBER | Warunki Sprzedaży Hurtowej",
+  description:
+    "Regulamin sklepu DiRENBER - warunki sprzedaży hurtowej odzieży damskiej. Minimum zamówienie 300 PLN, dostawa 2-3 dni, płatność przelewem. DIRENBER Sp. z o.o.",
+  keywords: [
+    "regulamin",
+    "warunki sprzedaży",
+    "DiRENBER regulamin",
+    "hurtownia odzieży regulamin",
+    "sprzedaż hurtowa warunki",
+  ],
+  alternates: {
+    canonical: "https://direnber.eu/regulamin",
+  },
+}
 
 export default async function TermsPage() {
   const supabase = await createClient()

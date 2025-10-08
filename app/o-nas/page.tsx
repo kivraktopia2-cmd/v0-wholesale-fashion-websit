@@ -5,6 +5,34 @@ import { Check, Heart, Sparkles, Users, Zap } from "lucide-react"
 import { StorefrontHeader } from "@/components/storefront/storefront-header"
 import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import { createClient } from "@/lib/supabase/server"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "O Nas - DIRENBER Sp. z o.o. | Hurtownia Odzieży Damskiej Polska",
+  description:
+    "DIRENBER Sp. z o.o. - profesjonalna hurtownia odzieży damskiej. Bezpośredni producent z Turcji. Sprzedaż hurtowa sukienek, bluzek, spodni. Przybyszów 52, 67-410 Sława. Minimum zamówienie 300 PLN.",
+  keywords: [
+    "direnber",
+    "DiRENBER",
+    "DIRENBER Sp. z o.o.",
+    "o firmie",
+    "hurtownia odzieży damskiej",
+    "producent odzieży",
+    "sprzedaż hurtowa odzieży",
+    "odzież damska hurt",
+    "Sława",
+    "Przybyszów",
+  ],
+  openGraph: {
+    title: "O Nas - DIRENBER | Hurtownia Odzieży Damskiej",
+    description: "Bezpośredni producent wysokiej jakości odzieży damskiej. Sprzedaż hurtowa w Polsce i Europie.",
+    url: "https://direnber.eu/o-nas",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://direnber.eu/o-nas",
+  },
+}
 
 export default async function AboutPage() {
   const supabase = await createClient()

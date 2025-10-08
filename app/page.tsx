@@ -8,20 +8,31 @@ import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "DiRENBER - Hurtownia Odzieży Damskiej | Sprzedaż Hurtowa Odzieży",
+  title: "DiRENBER - Hurtownia Odzieży Damskiej | Sprzedaż Hurtowa Odzieży Polska",
   description:
-    "DiRENBER - profesjonalna hurtownia odzieży damskiej. Wysokiej jakości sukienki, bluzki, spodnie w asortymentach hurtowych. Minimum zamówienie 300 PLN. Dostawa 2-3 dni robocze.",
+    "DiRENBER - profesjonalna hurtownia odzieży damskiej w Polsce. Wysokiej jakości sukienki hurt, bluzki hurt, spodnie hurt w asortymentach hurtowych. Tanie ubrania hurt. Minimum zamówienie 300 PLN. Szybka dostawa 2-3 dni robocze. Sprzedaż hurtowa odzieży damskiej.",
   keywords: [
+    "direnber",
+    "DiRENBER",
     "hurtownia odzieży damskiej",
     "odzież damska hurt",
     "sukienki hurt",
     "bluzki hurt",
+    "spodnie hurt",
     "sprzedaż hurtowa odzieży",
-    "DiRENBER",
+    "odzież hurt Polska",
+    "tanie ubrania hurt",
+    "hurtownia odzieży",
+    "odzież damska hurtowo",
+    "hurt odzież damska",
+    "sprzedaż hurtowa ubrań",
+    "hurtownia sukienek",
+    "hurtownia bluzek",
   ],
   openGraph: {
-    title: "DiRENBER - Hurtownia Odzieży Damskiej",
-    description: "Wysokiej jakości odzież damska w asortymentach hurtowych. Minimum zamówienie 300 PLN.",
+    title: "DiRENBER - Hurtownia Odzieży Damskiej Polska",
+    description:
+      "Wysokiej jakości odzież damska w asortymentach hurtowych. Sukienki, bluzki, spodnie hurt. Minimum zamówienie 300 PLN. Dostawa 2-3 dni.",
     url: "https://direnber.eu",
     siteName: "DiRENBER",
     locale: "pl_PL",
@@ -30,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "DiRENBER - Hurtownia Odzieży Damskiej",
-    description: "Wysokiej jakości odzież damska w asortymentach hurtowych",
+    description: "Wysokiej jakości odzież damska w asortymentach hurtowych. Sprzedaż hurtowa odzieży w Polsce.",
   },
   alternates: {
     canonical: "https://direnber.eu",

@@ -3,6 +3,31 @@ import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import { ContactForm } from "@/components/storefront/contact-form"
 import { createClient } from "@/lib/supabase/server"
 import { Mail, MapPin, Phone, Clock, MessageCircle } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Kontakt - DIRENBER Sp. z o.o. | Hurtownia Odzieży Damskiej",
+  description:
+    "Skontaktuj się z DIRENBER - hurtownia odzieży damskiej. Email: direnber@wp.pl, Tel: 535 204 804. Adres: Przybyszów 52, 67-410 Sława. Sprzedaż hurtowa odzieży damskiej w Polsce.",
+  keywords: [
+    "direnber kontakt",
+    "DiRENBER",
+    "kontakt hurtownia odzieży",
+    "DIRENBER Sp. z o.o.",
+    "Sława",
+    "Przybyszów 52",
+    "hurtownia odzieży damskiej kontakt",
+  ],
+  openGraph: {
+    title: "Kontakt - DIRENBER | Hurtownia Odzieży Damskiej",
+    description: "Skontaktuj się z nami: direnber@wp.pl, tel: 535 204 804. Przybyszów 52, 67-410 Sława.",
+    url: "https://direnber.eu/kontakt",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://direnber.eu/kontakt",
+  },
+}
 
 export default async function ContactPage() {
   const supabase = await createClient()

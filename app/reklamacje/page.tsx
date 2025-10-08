@@ -2,6 +2,17 @@ import { StorefrontHeader } from "@/components/storefront/storefront-header"
 import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import { createClient } from "@/lib/supabase/server"
 import { AlertCircle, Mail, Phone, Clock, CheckCircle } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Zwroty i Reklamacje - DiRENBER | Polityka Zwrotów Hurtownia Odzieży",
+  description:
+    "Polityka zwrotów i reklamacji DiRENBER - procedura składania reklamacji, warunki zwrotu towaru. Rozpatrzenie w 14 dni. DIRENBER Sp. z o.o. hurtownia odzieży damskiej.",
+  keywords: ["reklamacje", "zwroty", "polityka zwrotów", "DiRENBER", "reklamacja hurtownia", "zwrot towaru"],
+  alternates: {
+    canonical: "https://direnber.eu/reklamacje",
+  },
+}
 
 export default async function ComplaintsPage() {
   const supabase = await createClient()

@@ -3,6 +3,44 @@ import { notFound } from "next/navigation"
 import { StorefrontHeader } from "@/components/storefront/storefront-header"
 import { StorefrontFooter } from "@/components/storefront/storefront-footer"
 import { ProductsGrid } from "@/components/storefront/products-grid"
+import type { Metadata } from "next"
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const supabase = await createClient()
+
+  const { data: category } = await supabase.from("categories").select("*").eq("slug", params.slug).single()
+
+  if (!category) {
+    return {
+      title: "Kategoria nie znaleziona | DiRENBER",
+    }
+  }
+
+  return {
+    title: `${category.name_pl} Hurt | DiRENBER Hurtownia Odzieży Damskiej`,
+    description: `${category.name_pl} - sprzedaż hurtowa odzieży damskiej. Szeroki wybór produktów w kategorii ${category.name_pl}. Minimum zamówienie 300 PLN. Dostawa 2-3 dni. DiRENBER - profesjonalna hurtownia odzieży.`,
+    keywords: [
+      "direnber",
+      "DiRENBER",
+      category.name_pl,
+      `${category.name_pl} hurt`,
+      "hurtownia odzieży damskiej",
+      "odzież damska hurt",
+      "sprzedaż hurtowa",
+      "tanie ubrania hurt",
+      "odzież hurt Polska",
+    ],
+    openGraph: {
+      title: `${category.name_pl} Hurt | DiRENBER`,
+      description: `${category.name_pl} - sprzedaż hurtowa odzieży damskiej w Polsce`,
+      url: `https://direnber.eu/kategoria/${params.slug}`,
+      type: "website",
+    },
+    alternates: {
+      canonical: `https://direnber.eu/kategoria/${params.slug}`,
+    },
+  }
+}
 
 export default async function CategoryPage({ params }: { params: { slug: string } }) {
   const supabase = await createClient()

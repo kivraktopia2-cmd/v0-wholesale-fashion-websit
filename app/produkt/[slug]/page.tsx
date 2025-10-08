@@ -38,20 +38,34 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const category = product.subcategories?.categories?.name_pl || ""
 
   return {
-    title: `${product.name_pl} | DiRENBER Hurtownia Odzieży`,
-    description: `${product.description_pl || product.name_pl} - Dostępne kolory: ${colors}. Cena hurtowa: ${product.price_pln} PLN. Minimum zamówienie 300 PLN. Dostawa 2-3 dni.`,
-    keywords: [product.name_pl, "hurtownia odzieży", category, "odzież damska hurt", "DiRENBER", ...colors.split(", ")],
+    title: `${product.name_pl} Hurt | DiRENBER Hurtownia Odzieży Damskiej`,
+    description: `${product.description_pl || product.name_pl} - Sprzedaż hurtowa. Dostępne kolory: ${colors}. Cena hurtowa: ${product.price_pln} PLN. ${category} hurt. Minimum zamówienie 300 PLN. Dostawa 2-3 dni. DiRENBER - profesjonalna hurtownia odzieży damskiej.`,
+    keywords: [
+      "direnber",
+      "DiRENBER",
+      product.name_pl,
+      `${product.name_pl} hurt`,
+      "hurtownia odzieży",
+      "odzież damska hurt",
+      category,
+      `${category} hurt`,
+      "sprzedaż hurtowa",
+      "tanie ubrania hurt",
+      ...colors.split(", "),
+    ],
     openGraph: {
-      title: `${product.name_pl} | DiRENBER`,
-      description: product.description_pl || product.name_pl,
-      images: firstImage ? [{ url: firstImage, width: 800, height: 1200, alt: product.name_pl }] : [],
+      title: `${product.name_pl} Hurt | DiRENBER`,
+      description: `${product.description_pl || product.name_pl} - Sprzedaż hurtowa odzieży damskiej. Cena: ${product.price_pln} PLN`,
+      images: firstImage
+        ? [{ url: firstImage, width: 800, height: 1200, alt: `${product.name_pl} - DiRENBER hurtownia odzieży` }]
+        : [],
       type: "website",
       url: `https://direnber.eu/produkt/${params.slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.name_pl} | DiRENBER`,
-      description: product.description_pl || product.name_pl,
+      title: `${product.name_pl} Hurt | DiRENBER`,
+      description: `${product.description_pl || product.name_pl} - Hurtownia odzieży damskiej`,
       images: firstImage ? [firstImage] : [],
     },
     alternates: {
