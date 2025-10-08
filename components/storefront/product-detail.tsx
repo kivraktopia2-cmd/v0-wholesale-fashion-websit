@@ -325,7 +325,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               {selectedColorData.stock_quantity > 0 ? (
                 <>
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-gray-700">Stan magazynowy: {selectedColorData.stock_quantity} szt.</span>
+                  <span className="text-gray-700">Seria: {selectedColorData.stock_quantity} szt.</span>
                 </>
               ) : (
                 <>

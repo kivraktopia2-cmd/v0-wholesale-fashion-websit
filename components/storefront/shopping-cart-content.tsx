@@ -286,7 +286,7 @@ export function ShoppingCartContent() {
                       Asortyment: {piecesPerPackage} szt. (wszystkie rozmiary)
                     </p>
                     <p className="text-xs sm:text-sm text-gray-600 mt-1">
-                      Dostępny stan: <span className="font-semibold">{item.stockQuantity} szt.</span>
+                      Seria: <span className="font-semibold">{item.stockQuantity || 0} szt.</span>
                     </p>
 
                     <div className="flex items-center gap-2 mt-3">

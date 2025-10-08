@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
+import { AnalyticsTracker } from "@/components/analytics/analytics-tracker"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -74,6 +75,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={`font-sans ${inter.variable}`}>
+        <AnalyticsTracker />
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>

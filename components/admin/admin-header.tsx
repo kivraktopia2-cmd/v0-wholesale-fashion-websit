@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
-import { LogOut, Package, Settings, Home, Users } from "lucide-react"
+import { LogOut, Package, Settings, Home, Users, BarChart3 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -49,6 +49,12 @@ export function AdminHeader({ user }: AdminHeaderProps) {
                 <Button variant="ghost" className="gap-2">
                   <Settings className="h-4 w-4" />
                   Kategorie
+                </Button>
+              </Link>
+              <Link href="/admin/analytics">
+                <Button variant="ghost" className="gap-2">
+                  <BarChart3 className="h-4 w-4" />
+                  Analityka
                 </Button>
               </Link>
               <Link href="/admin/users">
